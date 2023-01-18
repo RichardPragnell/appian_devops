@@ -1,0 +1,4 @@
+com.appiancorp.ps.plugins.contenttools
+Content Tools
+1.7.3
+

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_160154</versionUuid>
+    <rule>
+        <name>VAC_COM_formatDuration</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_137944</uuid>
+        <description>Given a duration map provided by VAC_COM_getDuration returns a formatted text</description>
+        <parentUuid>dbecc6ad-7fdc-4080-af31-97861632850a</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>a!localVariables(
+  local!bundle: #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_122957"(
+    bundleName: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_157290",
+    bundleFolder: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_157255"
+  ),
+  if(
+    or(isnull(ri!duration)),
+    null,
+    a!match(
+      value: ri!style,
+      equals: "SHORT",
+      then: joinarray(
+        if(
+          ri!duration.years &gt; 0,
+          /* Years + Months */
+          {
+            if(
+              ri!duration.years = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Year", bundle: local!bundle)
+            ),
+            ri!duration.years &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Years", bundle: local!bundle),
+            if(
+              ri!duration.months &gt; 0,
+              if(
+                ri!duration.months = 1,
+                "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Month", bundle: local!bundle),
+                ri!duration.months &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Months", bundle: local!bundle)
+              ),
+              ""
+            )
+          },
+          if(
+            ri!duration.months &gt; 0,
+            /* Months + Days */
+            {
+              if(
+                ri!duration.months = 1,
+                "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Month", bundle: local!bundle),
+                ri!duration.months &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Months", bundle: local!bundle)
+              ),
+              if(
+                ri!duration.days &gt; 0,
+                if(
+                  ri!duration.days = 1,
+                  "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Day", bundle: local!bundle),
+                  ri!duration.days &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Days", bundle: local!bundle)
+                ),
+                ""
+              )
+            },
+            if(
+              ri!duration.days &gt; 0,
+              /* Days + Hours */
+              {
+                if(
+                  ri!duration.days = 1,
+                  "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Day", bundle: local!bundle),
+                  ri!duration.days &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Days", bundle: local!bundle)
+                ),
+                if(
+                  ri!duration.hours &gt; 0,
+                  if(
+                    ri!duration.hours = 1,
+                    "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hour", bundle: local!bundle),
+                    ri!duration.hours &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hours", bundle: local!bundle)
+                  ),
+                  ""
+                )
+              },
+              if(
+                ri!duration.hours &gt; 0,
+                /* Hours + Minutes */
+                {
+                  if(
+                    ri!duration.hours = 1,
+                    "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hour", bundle: local!bundle),
+                    ri!duration.hours &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hours", bundle: local!bundle)
+                  ),
+                  if(
+                    ri!duration.minutes &gt; 0,
+                    if(
+                      ri!duration.minutes = 1,
+                      "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minute", bundle: local!bundle),
+                      ri!duration.minutes &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minutes", bundle: local!bundle)
+                    ),
+                    ""
+                  )
+                },
+                if(
+                  ri!duration.minutes &gt; 0,
+                  /* Minutes + Seconds */
+                  {
+                    if(
+                      ri!duration.minutes = 1,
+                      "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minute", bundle: local!bundle),
+                      ri!duration.minutes &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minutes", bundle: local!bundle)
+                    ),
+                    if(
+                      ri!duration.seconds &gt; 0,
+                      if(
+                        ri!duration.seconds = 1,
+                        "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Second", bundle: local!bundle),
+                        ri!duration.seconds &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Seconds", bundle: local!bundle)
+                      ),
+                      ""
+                    )
+                  },
+                  /* Seconds */
+                  {
+                    if(
+                      ri!duration.seconds = 1,
+                      "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Second", bundle: local!bundle),
+                      ri!duration.seconds &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Seconds", bundle: local!bundle)
+                    )
+                  }
+                )
+              )
+            )
+          )
+        ),
+        " "
+      ),
+      default: joinarray(
+        {
+          if(
+            ri!duration.years &gt; 0,
+            if(
+              ri!duration.years = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Year", bundle: local!bundle),
+              ri!duration.years &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Years", bundle: local!bundle)
+            ),
+            ""
+          ),
+          if(
+            ri!duration.months &gt; 0,
+            if(
+              ri!duration.months = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Month", bundle: local!bundle),
+              ri!duration.months &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Months", bundle: local!bundle)
+            ),
+            ""
+          ),
+          if(
+            ri!duration.days &gt; 0,
+            if(
+              ri!duration.days = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Day", bundle: local!bundle),
+              ri!duration.days &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Days", bundle: local!bundle)
+            ),
+            ""
+          ),
+          if(
+            ri!duration.hours &gt; 0,
+            if(
+              ri!duration.hours = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hour", bundle: local!bundle),
+              ri!duration.hours &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Hours", bundle: local!bundle)
+            ),
+            ""
+          ),
+          if(
+            ri!duration.minutes &gt; 0,
+            if(
+              ri!duration.minutes = 1,
+              "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minute", bundle: local!bundle),
+              ri!duration.minutes &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Minutes", bundle: local!bundle)
+            ),
+            ""
+          ),
+          if(
+            ri!duration.seconds = 1,
+            "1 " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Second", bundle: local!bundle),
+            ri!duration.seconds &amp; " " &amp; #"_a-0000e8d6-c87f-8000-e9e5-01ef9001ef90_123186"(label: "Seconds", bundle: local!bundle)
+          )
+        },
+        " "
+      )
+    )
+  )
+)</definition>
+        <namedTypedValue>
+            <name>duration</name>
+            <type>
+                <name>Map</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>style</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_157417"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_160154"/>
+    </history>
+</contentHaul>

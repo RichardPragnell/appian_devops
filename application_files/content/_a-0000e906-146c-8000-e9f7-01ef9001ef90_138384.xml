@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_138395</versionUuid>
+    <rule>
+        <name>VAC_COM_durationToMap</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_138384</uuid>
+        <description>Transforms a given duration in Appian's decimal format to a map</description>
+        <parentUuid>dbecc6ad-7fdc-4080-af31-97861632850a</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>/*
+  1.Divide the total number of seconds by 60 to get the total number of minutes
+  2.Divide the resulting number of minutes by 60 to get the total number of hours
+  3.Divide the resulting number of hours by 24 to get the total number of days
+  4.Divide the resulting number of days by 30 to get the total number of months
+  5.Divide the resulting number of months by 12 to get the total number of years
+  Use the remainder of the division from step 5 to calculate the number of months that are left over
+  Use the remainder of the division from step 4 to calculate the number of days that are left over
+  Use the remainder of the division from step 3 to calculate the number of hours that are left over
+  Use the remainder of the division from step 2 to calculate the number of minutes that are left over
+  Use the remainder of the division from step 1 to calculate the number of seconds that are left over
+*/
+if(
+  isnull(ri!duration),
+  null,
+  a!localVariables(
+    /* Do NOT remove tointeger */
+    local!totalSeconds: tointeger(ri!duration * 86400), /* 24 x 60 x 60 */
+    local!totalMinutes: local!totalSeconds/60,
+    local!totalHours: local!totalMinutes/60,
+    local!totalDays: local!totalHours/24,
+    local!totalMonths: local!totalDays/30, /* 30 day month */
+    a!map(
+      years: floor(local!totalMonths/12),
+      months: floor(mod(local!totalMonths, 12)),
+      days: floor(mod(local!totalDays, 30)),
+      hours: floor(mod(local!totalHours, 24)),
+      minutes: floor(mod(local!totalMinutes, 60)),
+      seconds: floor(mod(local!totalSeconds, 60))
+    )    
+  )
+)</definition>
+        <namedTypedValue>
+            <name>duration</name>
+            <type>
+                <name>double</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_138395"/>
+    </history>
+</contentHaul>

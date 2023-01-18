@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<groupHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>b53b18d5-b06c-48f1-94d6-b47ad91f2fc4</versionUuid>
+    <group>
+        <name>VAC_COM Users</name>
+        <securityMap>SECURITYMAP_TEAM</securityMap>
+        <uuid>b53b18d5-b06c-48f1-94d6-b47ad91f2fc4</uuid>
+        <groupTypeUuid>SYSTEM_GROUP_TYPE_CUSTOM</groupTypeUuid>
+        <description>Group that all VAC Common activity is secured to</description>
+        <delegatedCreation>false</delegatedCreation>
+        <memberPolicy>MEMBERPOLICY_CLOSED</memberPolicy>
+        <viewingPolicy>VIEWINGPOLICY_LOW</viewingPolicy>
+        <attributes/>
+    </group>
+    <members>
+        <users/>
+        <groups>
+            <groupUuid>6e56c99b-797a-45ac-b4f8-ea2654947f97</groupUuid>
+        </groups>
+    </members>
+    <admins>
+        <users/>
+        <groups>
+            <groupUuid>6e56c99b-797a-45ac-b4f8-ea2654947f97</groupUuid>
+        </groups>
+    </admins>
+    <ruleSet/>
+    <history>
+        <historyInfo versionUuid="b53b18d5-b06c-48f1-94d6-b47ad91f2fc4"/>
+    </history>
+</groupHaul>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<processModelFolderHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>2e5eb44e-2669-4818-9a7f-fab57881f1f8</versionUuid>
+    <processModelFolder>
+        <name>VAC_COM Process Models</name>
+        <uuid>3c400148-6a2f-4963-812f-15df2e7621e5</uuid>
+        <description>Process models folder for the VAC Common application</description>
+    </processModelFolder>
+    <roleMap>
+        <role name="ADMIN_OWNER">
+            <users/>
+            <groups>
+                <groupUuid>6e56c99b-797a-45ac-b4f8-ea2654947f97</groupUuid>
+            </groups>
+        </role>
+        <role name="EDITOR">
+            <users/>
+            <groups/>
+        </role>
+        <role name="EXPLICIT_NONMEMBER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="VIEWER">
+            <users/>
+            <groups>
+                <groupUuid>b53b18d5-b06c-48f1-94d6-b47ad91f2fc4</groupUuid>
+            </groups>
+        </role>
+        <role name="MANAGER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="INITIATOR">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="2e5eb44e-2669-4818-9a7f-fab57881f1f8"/>
+    </history>
+</processModelFolderHaul>

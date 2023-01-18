@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_134429</versionUuid>
+    <rule>
+        <name>VAC_COM_formatDate</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_134388</uuid>
+        <description>Formats a given date time</description>
+        <parentUuid>dbecc6ad-7fdc-4080-af31-97861632850a</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(isnull(ri!date), null,
+  a!match(
+    value: upper(ri!style),
+    equals: "SHORT",
+    then: if(
+      /* Else if the date is on a future date, show the full date and time */
+      ri!date &gt; today()+1,
+      text(ri!date, "MMM d, yyyy h:mm a"),
+      if(
+        /* Else if the input is sometime today, just show the time. */
+        ri!date &gt; today(),
+        text(ri!date, "h:mm:ss a"),
+        if(
+          /* Else if the input is sometime this year, just show the day and month. */
+          ri!date &gt; date(year(now()), 1, 1),
+          text(ri!date, "MMM d"),
+          /* Else, show day, month, and year */
+          text(ri!date, "MMM d, yyyy")
+        )
+      )
+    ),
+    equals: "ONLY_DATE",
+    then: text(ri!date, "dd/mm/yyyy"),
+    default: text(ri!date, "DD/M/YY hh:mm")
+  )
+)</definition>
+        <namedTypedValue>
+            <name>date</name>
+            <type>
+                <name>dateTime</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>style</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_134429"/>
+    </history>
+</contentHaul>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_159449</versionUuid>
+    <rule>
+        <name>VAC_COM_getRuleRefFromUuuid</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_126633</uuid>
+        <description>Obtains a reference to a rule given a uuid</description>
+        <parentUuid>dbecc6ad-7fdc-4080-af31-97861632850a</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(
+  isnull(ri!uuid),
+  null,
+  a!localVariables(
+    local!ruleName: extract(
+      getcontentdetailsbyuuid(ri!uuid),
+      "[Name: ",
+      ", Id"
+    ),
+    if(
+      a!isNullOrEmpty(local!ruleName),
+      null,
+      getrulereferencebyname(local!ruleName)
+    )
+  )
+)
+
+/*if(*/
+  /*isnull(ri!uuid),*/
+  /*null,*/
+  /*a!localVariables(*/
+    /*local!ruleName: index(a!aos_getObjectsByUuid(*/
+      /*uuids: ri!uuid,*/
+      /*typeIds: 'type!{http://www.appian.com/ae/types/2009}Rule',*/
+      /*properties: { "name" }*/
+    /*).data, "name", 1, null),*/
+    /*if(*/
+      /*a!isNullOrEmpty(local!ruleName),*/
+      /*null,*/
+      /*eval("rule!" &amp; local!ruleName)*/
+    /*)*/
+  /*)*/
+/*)*/</definition>
+        <namedTypedValue>
+            <name>uuid</name>
+            <type>
+                <name>string</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+            <value/>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_126645"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_159449"/>
+    </history>
+</contentHaul>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_156746</versionUuid>
+    <rule>
+        <name>VAC_VTM_Task</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_126823</uuid>
+        <description>Given a Task's context renders the interface</description>
+        <parentUuid>237314a0-b105-4749-a4a4-b936724163ad</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>a!localVariables(
+  local!taskContext: a!refreshVariable(
+    value: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126829"(taskId: ri!taskContext.taskId),
+    refreshOnReferencedVarChange: false
+  ),
+  local!context: a!refreshVariable(
+    value: if(isnull(local!taskContext), null, #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_130536"(json: local!taskContext.context)),
+    refreshOnReferencedVarChange: false
+  ),
+  local!disabled: a!refreshVariable(
+    value: not(#"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126891"(
+      taskId: ri!taskContext.taskId,
+      user: loggedInUser()
+    )),
+    refreshOnReferencedVarChange: false
+  ),
+  if(
+    and(
+      a!isNotNullOrEmpty(local!taskContext),
+      #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126658"(uuid: local!taskContext.interfaceUuid)
+    ),
+    #"SYSTEM_SYSRULES_headerContentLayout"(
+      header: {
+        #"SYSTEM_SYSRULES_cardLayout"(
+          contents: {
+            #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126860"(
+              taskId: ri!taskContext.taskId,
+              disabled: local!disabled,
+              cancel: ri!cancel
+            )
+          },
+          height: "AUTO",
+          marginBelow: "NONE",
+          showBorder: false,
+          padding: "NONE"
+        )
+      },
+      contents: {
+        #"SYSTEM_SYSRULES_forEach"(
+          items: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126633"(uuid: local!taskContext.interfaceUuid),
+          expression: fv!item(
+            context: local!context,
+            contextSaveInto: a!save(
+              ri!taskContext,
+              #"urn:appian:function:v1:a:update"(
+                local!taskContext,
+                "context",
+                #"SYSTEM_SYSRULES_toJson_v1"(
+                  #"urn:appian:function:v1:a:update"(
+                    local!context,
+                    "_idTask",
+                    ri!taskContext.taskId
+                  )
+                )
+              )
+            ),
+            disabled: local!disabled,
+            cancel: ri!cancel
+          )
+        )
+      },
+      isHeaderFixed: true,
+      contentsPadding: "EVEN_LESS"
+    ),
+    #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_130716"(taskId: ri!taskContext.taskId)
+  )
+)</definition>
+        <namedTypedValue>
+            <name>taskContext</name>
+            <type>
+                <name>VAC_VTM_TaskContext</name>
+                <namespace>urn:com:appian:types:VAC_VTM</namespace>
+            </type>
+        </namedTypedValue>
+        <namedTypedValue>
+            <name>cancel</name>
+            <type>
+                <name>boolean</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>interface</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <typedValue>
+        <type>
+            <name>RuleTestConfig?list</name>
+            <namespace>http://www.appian.com/ae/types/2009</namespace>
+        </type>
+        <value>
+            <el>
+                <a:name/>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="a:Expression">#"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126829"(taskId: 1)</a:value>
+                    <a:nameRef>taskContext</a:nameRef>
+                    <a:id>1</a:id>
+                </a:ruleInputTestConfigs>
+                <a:ruleInputTestConfigs>
+                    <a:value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" xsi:type="xsd:boolean"/>
+                    <a:nameRef>cancel</a:nameRef>
+                    <a:id>2</a:id>
+                </a:ruleInputTestConfigs>
+                <a:assertions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+            </el>
+        </value>
+    </typedValue>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_129418"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_133104"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_135761"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_156746"/>
+    </history>
+</contentHaul>

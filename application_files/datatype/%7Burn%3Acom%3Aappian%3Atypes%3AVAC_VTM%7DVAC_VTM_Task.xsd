@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:com:appian:types:VAC_VTM"
+  xmlns:tns="urn:com:appian:types:VAC_VTM" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="VAC_VTM_Task">
+    <xsd:annotation>
+      <xsd:appinfo source="appian.jpa">@Table(name="VAC_VTM_Task")</xsd:appinfo>
+      <xsd:appinfo source="http://www.appian.com/ae/types/2009">
+        <ns2:Metadata xmlns:ns2="http://www.appian.com/ae/types/2009">
+          <ns2:versionUuid>0000e95e-aee1-8000-f188-014d98014d98</ns2:versionUuid>
+          <ns2:history>
+            <ns2:historyInfo versionUuid="0000e939-cf7d-8000-ef0d-014d98014d98"/>
+            <ns2:historyInfo versionUuid="0001e93b-2b06-8000-ef5f-014d98014d98"/>
+            <ns2:historyInfo versionUuid="0000e943-034d-8000-f07d-014d98014d98"/>
+            <ns2:historyInfo versionUuid="0000e95e-aee1-8000-f188-014d98014d98"/>
+          </ns2:history>
+        </ns2:Metadata>
+      </xsd:appinfo>
+      <xsd:documentation><![CDATA[Task instance type]]></xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="id" nillable="true" type="xsd:int">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Id @GeneratedValue @Column(name="id")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="label" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255, name="label")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="category" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="parentReference" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255)</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="assignmentHash" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=64, name="assignmentHash")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="defaultAssignmentHash" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=64, name="defaultAssignmentHash")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="owner" nillable="true" type="xsd:string">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(length=255, name="owner")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="createdDate" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="createdDate")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="startDate" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="startDate")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="endDate" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="endDate")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="deadline" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="deadline")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="activationDate" nillable="true" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:appinfo source="appian.jpa">@Column(name="activationDate")</xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

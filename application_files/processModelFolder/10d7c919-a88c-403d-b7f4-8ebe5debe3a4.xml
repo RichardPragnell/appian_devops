@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<processModelFolderHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>faf2aebb-843e-4548-9d57-558e1a31054e</versionUuid>
+    <processModelFolder>
+        <name>VAC_VTM Process Models</name>
+        <uuid>10d7c919-a88c-403d-b7f4-8ebe5debe3a4</uuid>
+        <description>Stores process models for the application</description>
+    </processModelFolder>
+    <roleMap>
+        <role name="ADMIN_OWNER">
+            <users/>
+            <groups>
+                <groupUuid>492412ba-29e3-493c-a97c-3a9854e0f4a3</groupUuid>
+            </groups>
+        </role>
+        <role name="EDITOR">
+            <users/>
+            <groups/>
+        </role>
+        <role name="EXPLICIT_NONMEMBER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="VIEWER">
+            <users/>
+            <groups>
+                <groupUuid>a653602d-0040-4155-969d-2ba91cdebd00</groupUuid>
+            </groups>
+        </role>
+        <role name="MANAGER">
+            <users/>
+            <groups/>
+        </role>
+        <role name="INITIATOR">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="faf2aebb-843e-4548-9d57-558e1a31054e"/>
+    </history>
+</processModelFolderHaul>

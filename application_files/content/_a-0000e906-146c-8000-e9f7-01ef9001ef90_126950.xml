@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_162101</versionUuid>
+    <rule>
+        <name>VAC_VTM_filterValidAssignments</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_126950</uuid>
+        <description>Checks if a given assignment (User or Group) is valid</description>
+        <parentUuid>237314a0-b105-4749-a4a4-b936724163ad</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>a!match(
+  value: runtimetypeof(ri!userOrGroup),
+  equals: 4, /* User */
+  then: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126646"(user: ri!userOrGroup, mustBeActive: true),
+  equals: 5, /* Group */
+  then: a!doesGroupExist(ri!userOrGroup),
+  default: false
+) </definition>
+        <namedTypedValue>
+            <name>userOrGroup</name>
+            <type>
+                <name>UserOrGroup</name>
+                <namespace>http://www.appian.com/ae/types/2009</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_129252"/>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_162101"/>
+    </history>
+</contentHaul>

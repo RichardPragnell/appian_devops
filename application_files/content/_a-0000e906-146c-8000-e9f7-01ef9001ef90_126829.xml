@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<contentHaul xmlns:a="http://www.appian.com/ae/types/2009">
+    <versionUuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_129218</versionUuid>
+    <rule>
+        <name>VAC_VTM_getTaskContext</name>
+        <uuid>_a-0000e906-146c-8000-e9f7-01ef9001ef90_126829</uuid>
+        <description>Obtains from DB the context of a given taskId</description>
+        <parentUuid>237314a0-b105-4749-a4a4-b936724163ad</parentUuid>
+        <visibility>
+            <advertise>false</advertise>
+            <hierarchy>true</hierarchy>
+            <indexable>true</indexable>
+            <quota>false</quota>
+            <searchable>true</searchable>
+            <system>false</system>
+            <unlogged>false</unlogged>
+        </visibility>
+        <definition>if(
+  isnull(ri!taskId),
+  null,
+  index(
+    #"SYSTEM_SYSRULES_queryEntity_v2"(
+      entity: #"_a-0000e906-146c-8000-e9f7-01ef9001ef90_126841",
+      query: #"SYSTEM_SYSRULES_query"(
+        filter: #"SYSTEM_SYSRULES_queryFilter"(
+          field: "taskId",
+          operator: "=",
+          value: ri!taskId
+        ),
+        pagingInfo: #"SYSTEM_SYSRULES_pagingInfo"(startIndex: 1, batchSize: 1)
+      ),
+      fetchTotalCount: false
+    ).data,
+    1,
+    null
+  )
+)</definition>
+        <namedTypedValue>
+            <name>taskId</name>
+            <type>
+                <name>int</name>
+                <namespace>http://www.w3.org/2001/XMLSchema</namespace>
+            </type>
+        </namedTypedValue>
+        <preferredEditor>legacy</preferredEditor>
+        <offlineEnabled>false</offlineEnabled>
+    </rule>
+    <roleMap public="true">
+        <role inherit="true" allowForAll="false" name="readers">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="authors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="true" allowForAll="false" name="administrators">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyReaders">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAuthors">
+            <users/>
+            <groups/>
+        </role>
+        <role inherit="false" allowForAll="false" name="denyAdministrators">
+            <users/>
+            <groups/>
+        </role>
+    </roleMap>
+    <history>
+        <historyInfo versionUuid="_a-0000e906-146c-8000-e9f7-01ef9001ef90_129218"/>
+    </history>
+</contentHaul>
